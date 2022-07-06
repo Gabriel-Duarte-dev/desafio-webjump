@@ -5,6 +5,7 @@ const colors = {
   red: "#CB0D1F",
   lightBlue: "#00A8A9",
   darkBlue: "#1E2B50",
+  orange: "#F26324",
 };
 
 const fonts = {
@@ -18,6 +19,7 @@ const breakpoints = {
   md: "768px",
   lg: "1024px",
   xl: "1440px",
+  "2xl": "1920px",
 };
 
 const styles = {
