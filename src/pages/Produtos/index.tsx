@@ -1,4 +1,5 @@
 import { Flex, GridItem, Text, Box } from "@chakra-ui/react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Boxfilter } from "../../components/Boxfilter";
 import { Catalogo } from "../../components/Catalogo";
@@ -6,10 +7,11 @@ import { Layout } from "../../components/Layout";
 
 export function Produtos() {
   const { product } = useParams();
+
   return (
-    <Layout>
+    <Layout category>
       <GridItem as="nav" area="nav">
-        <Boxfilter />
+        <Boxfilter category={product ?? ""} />
       </GridItem>
       <GridItem as="main" area="main">
         <Catalogo title={product ?? ""} />

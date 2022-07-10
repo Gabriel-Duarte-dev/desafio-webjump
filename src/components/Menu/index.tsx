@@ -1,8 +1,12 @@
 import { Box, List, ListItem } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { menuItens } from "../Header";
+import { MenuItemDTO } from "../../services/menu";
 
-export function Menu() {
+interface MenuProps {
+  menuItens: MenuItemDTO[];
+}
+
+export function Menu({ menuItens }: MenuProps) {
   const navigate = useNavigate();
   return (
     <Box
@@ -25,12 +29,15 @@ export function Menu() {
             fontSize="16px"
             color="white"
             fontWeight="bold"
+            textTransform="uppercase"
             cursor="pointer"
             transition="0.3s"
             _hover={{ transform: "scale(1.1)" }}
-            onClick={() => navigate(item.path)}
+            onClick={() => {
+              if (item.path !== "contato") navigate(`/${item.path}`);
+            }}
           >
-            {item.label}
+            {item.name}
           </ListItem>
         ))}
       </List>

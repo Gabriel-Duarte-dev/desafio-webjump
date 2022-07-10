@@ -3,7 +3,10 @@ import { extendTheme } from "@chakra-ui/react";
 const colors = {
   black: "#000",
   red: "#CB0D1F",
+  redHover: "#e00d22",
   lightBlue: "#00A8A9",
+  lightBlueHover: "#00c1c2",
+  lightBlueActive: "#00d0d1",
   darkBlue: "#1E2B50",
   orange: "#F26324",
 };

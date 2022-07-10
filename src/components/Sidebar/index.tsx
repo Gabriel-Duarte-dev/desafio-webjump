@@ -10,15 +10,21 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { menuItens } from "../Header";
+import { MenuItemDTO } from "../../services/menu";
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  menuItens: MenuItemDTO[];
 }
 
-export function Sidebar({ isOpen, onClose }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, menuItens }: SidebarProps) {
   const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    onClose();
+  };
   return (
     <Drawer isOpen={isOpen} onClose={onClose} placement="left">
       <DrawerOverlay />
@@ -31,14 +37,16 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <ListItem
                 key={index}
                 as="li"
+                fontSize="16px"
                 color="white"
                 fontWeight="bold"
+                textTransform="uppercase"
                 cursor="pointer"
                 transition="0.3s"
                 _hover={{ transform: "scale(1.1)" }}
-                onClick={() => navigate(item.path)}
+                onClick={() => handleNavigate(`/${item.path}`)}
               >
-                {item.label}
+                {item.name}
               </ListItem>
             ))}
           </List>

@@ -11,34 +11,12 @@ import { Logo } from "../Logo";
 import { Menu } from "../Menu";
 import { Sidebar } from "../Sidebar";
 import { GiHamburgerMenu } from "react-icons/gi";
-
-export const menuItens = [
-  {
-    path: "/",
-    label: "PÁGINA INICIAL",
-  },
-  {
-    path: "/catalogo/camisetas",
-    label: "CAMISETAS",
-  },
-  {
-    path: "/catalogo/calças",
-    label: "CALÇAS",
-  },
-  {
-    path: "/catalogo/sapatos",
-    label: "SAPATOS",
-  },
-  {
-    path: "/catalogo/contato",
-    label: "CONTATO",
-  },
-];
-
-export type MenuItensType = keyof typeof menuItens;
+import { useMenu } from "../../hooks/useMenu";
 
 export function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { menu, isLoading, isError } = useMenu();
+
   return (
     <Flex as="header" w="100%" direction="column" align="center">
       <Flex
@@ -52,15 +30,14 @@ export function Header() {
         gap={4}
         padding={4}
       >
-        <IconButton
-          display={{ sm: "inherit", md: "none" }}
-          aria-label=""
-          icon={<GiHamburgerMenu />}
-          onClick={onOpen}
-        />
-        <Sidebar isOpen={isOpen} onClose={onClose} />
+        <Box display={{ md: "none" }}>
+          <GiHamburgerMenu size={32} cursor="pointer" onClick={onOpen} />
+        </Box>
+        {menu && (
+          <Sidebar isOpen={isOpen} onClose={onClose} menuItens={menu?.items} />
+        )}
         <Logo subtitle={false} />
-        <InputSearch colorBtn="red" />
+        <InputSearch />
       </Flex>
       <Flex
         display={{ sm: "none", md: "flex" }}
@@ -70,7 +47,7 @@ export function Header() {
         align="center"
         justify="center"
       >
-        <Menu />
+        {menu && <Menu menuItens={menu?.items} />}
       </Flex>
     </Flex>
   );
